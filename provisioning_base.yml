@@ -1,0 +1,8 @@
+---
+- name: Basic Setup
+  hosts: aliyun
+  become: true
+  roles:
+    - { role: base_packages }
+    - { role: zsh }
+    - { role: ohmyzsh }

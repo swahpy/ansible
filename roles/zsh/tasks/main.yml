@@ -1,0 +1,20 @@
+---
+- name: Ensure zsh is installed
+  package:
+    name: zsh
+    state: present
+
+- name: Get zsh path
+  command: which zsh
+  register: zsh_path_result
+  changed_when: false
+  failed_when: false
+
+- set_fact:
+    zsh_path: "{{ zsh_path_result.stdout }}"
+  when: zsh_path_result.stdout is defined
+
+- name: Make zsh as your default shell
+  user:
+    name: "{{ username }}"
+    shell: "{{ zsh_path }}"
